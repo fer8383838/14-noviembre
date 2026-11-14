@@ -1,298 +1,59 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#080d18">
-<title>Cabeza en alto</title>
-<style>
-:root{color-scheme:dark;--ink:#f4f6fa;--muted:#b9c5d8;--edge:#91a8c440;--ice:#dce8f7}
-*{box-sizing:border-box}
-[hidden]{display:none!important}
-body{margin:0;background:radial-gradient(ellipse at 50% 28%,#1b2e4b,#0d1729 42%,#080d18 79%) fixed;color:var(--ink);font:16px/1.5 system-ui,sans-serif}
-main{width:min(94%,850px);margin:auto}
-header{display:flex;align-items:center;gap:12px;padding:20px 0;border-bottom:1px solid var(--edge)}
-small,.eyebrow{font-size:.71rem;font-weight:650;letter-spacing:.19em;text-transform:uppercase;color:var(--muted)}
-header::before{content:"";width:6px;height:6px;background:#badaff;transform:rotate(45deg);box-shadow:0 0 14px #9cceff}
-.home{text-align:center;padding:clamp(24px,6vh,65px) 0 30px}
-h1,h2{margin:0 0 14px;font:400 clamp(2.7rem,8vw,5.2rem)/.98 Georgia,serif;letter-spacing:-.045em;text-wrap:balance}
-p{margin:0;color:var(--muted)}
-.home>p{font-size:clamp(.96rem,2.6vw,1.15rem)}
-.stage{position:relative;width:min(100%,590px);aspect-ratio:1.58;margin:8px auto 2px;display:grid;place-items:center;cursor:grab;touch-action:pan-y;user-select:none;isolation:isolate}
-.stage:active{cursor:grabbing}
-.stage::before{content:"";position:absolute;inset:4% 6%;background:radial-gradient(ellipse,#608ac139,transparent 68%);z-index:-1}
-.stage canvas,.stage img{width:100%;height:100%;object-fit:contain;display:block;position:absolute;inset:0}
-.stage img{mask-image:radial-gradient(ellipse,#000 52%,transparent 76%)}
-.hint{margin:0 0 20px;font-size:.83rem!important}
-.hint span{margin-right:7px;color:var(--ice)}
-button{font:inherit;min-height:44px;border:1px solid var(--edge);color:var(--ink);background:#101c2c;padding:8px 15px;border-radius:5px;cursor:pointer}
-button:hover{border-color:var(--ice)}
-button:disabled{opacity:.35;cursor:default}
-button:focus-visible,.stage:focus-visible{outline:2px solid #cfe5ff;outline-offset:3px}
-.solid{color:#0c1523;background:var(--ice);border-color:var(--ice);font-weight:735}
-.link{background:none;border:0;text-decoration:underline;text-underline-offset:4px;color:var(--muted);padding-inline:0}
-.gallery{padding:16px 0 30px}
-.card{display:grid;grid-template-columns:1fr 1fr;background:#131e2ef0;border:1px solid var(--edge);border-radius:10px;overflow:hidden}
-.picture{position:relative;background:#080e19;min-height:430px;padding:0;border:0;border-radius:0;touch-action:pan-y}
-.picture img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
-.copy{padding:clamp(18px,4vw,46px);align-self:center}
-.copy h2{font-size:clamp(2rem,5vw,3.45rem);margin-top:12px}
-.nav{display:flex;align-items:center;justify-content:space-between;gap:8px;border-top:1px solid var(--edge);margin-top:21px;padding-top:12px}
-.nav span{font-variant-numeric:tabular-nums;color:var(--muted);font-size:.87rem}
-.finish{text-align:center;padding:clamp(70px,16vh,170px) 0}
-.finish p{margin-bottom:22px}
-dialog{padding:8px;background:#080e19;border:1px solid var(--edge);max-width:95vw;max-height:94svh}
-dialog::backdrop{background:#03070de8}
-dialog form{text-align:right;margin-bottom:6px}
-dialog img{display:block;max-width:100%;max-height:78svh;margin:auto}
-@media(max-width:620px){
-  .card{grid-template-columns:1fr}
-  .picture{min-height:0;height:clamp(245px,48svh,440px)}
-}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1321">
+  <title>Para ti</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: #f3f5fa;
+      background: radial-gradient(ellipse at 50% 25%, #203450, #0b1321 72%);
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    main {
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 22px;
+      padding: 24px 18px;
+      text-align: center;
+    }
+
+    h1 {
+      max-width: 24ch;
+      margin: 0;
+      font-size: clamp(1.65rem, 5vw, 2.8rem);
+      font-weight: 400;
+      line-height: 1.18;
+      text-wrap: balance;
+    }
+
+    img {
+      display: block;
+      width: auto;
+      height: auto;
+      max-width: min(100%, 480px);
+      max-height: 66vh;
+      max-height: 66svh;
+      border-radius: 8px;
+      box-shadow: 0 14px 42px #0005;
+    }
+  </style>
 </head>
 <body>
-<main>
-<header><small>Para ti</small></header>
-
-<section class="home" id="inicio">
-  <h1 id="portada" tabindex="-1">Si vas a agachar la cabeza, que sea para que te pongan la corona.</h1>
-  <p>Después, cabeza en alto, princesa. Mira todo lo que ya has logrado.</p>
-  <div class="stage" id="escena" tabindex="0"
-       aria-label="Corona plateada. Arrastra de lado o usa las flechas para girarla.">
-    <img id="original" src="./img/corona.jpg" draggable="false"
-         alt="Corona plateada con filigrana y una piedra central">
-    <canvas id="corona" aria-hidden="true" hidden></canvas>
-  </div>
-  <p class="hint" id="pista" hidden><span aria-hidden="true">↔</span>Arrastra la corona de lado a lado</p>
-  <button class="solid" id="entrar" type="button">Ver las fotos →</button>
-</section>
-
-<section class="gallery" id="galeria" aria-label="Galería" hidden>
-  <button class="link" id="volver" type="button">← Portada</button>
-  <article class="card">
-    <button id="ampliar" class="picture" type="button" aria-label="Ver foto completa">
-      <img id="foto" alt="">
-    </button>
-    <div class="copy">
-      <div aria-live="polite">
-        <small class="eyebrow" id="tema"></small>
-        <h2 id="frase" tabindex="-1"></h2>
-        <p id="nota"></p>
-      </div>
-      <div class="nav">
-        <button id="anterior" type="button" aria-label="Foto anterior">←</button>
-        <span id="numero"></span>
-        <button id="siguiente" class="solid" type="button">Siguiente →</button>
-      </div>
-    </div>
-  </article>
-</section>
-
-<section class="finish" id="cierre" hidden>
-  <h2 id="ultima" tabindex="-1">Sé que puedes. Y sé que vas a llegar lejos.</h2>
-  <p>Pero no tienes que llegar sola ni esperar a que todo te pese para contar conmigo. Si quieres una mano, te la doy. Y si solo quieres compañía, me quedo a tu lado.</p>
-  <button id="repetir" type="button">Volver a ver las fotos</button>
-</section>
-
-<dialog id="visor" aria-label="Foto completa">
-  <form method="dialog"><button aria-label="Cerrar foto" autofocus>×</button></form>
-  <img id="grande" alt="">
-</dialog>
-</main>
-
-<script>
-const $ = id => document.getElementById(id);
-const escena = $("escena"), original = $("original"), lienzo = $("corona");
-const ctx = lienzo.getContext("2d");
-const textura = document.createElement("canvas");
-const pixeles = textura.getContext("2d", {willReadFrequently:true});
-const recorta = (v,a,b) => Math.max(a,Math.min(b,v));
-const limite = 1.05;
-let angulo = 0, dedo = null, lista = false, cuadro = 0;
-
-function preparar() {
-  if (!ctx || !pixeles || !original.naturalWidth) return;
-  try {
-    const w = 760, h = Math.round(w * original.naturalHeight / original.naturalWidth);
-    textura.width = w;
-    textura.height = h;
-    pixeles.drawImage(original,0,0,w,h);
-    const imagen = pixeles.getImageData(0,0,w,h), a = imagen.data;
-    for (let i=0; i<a.length; i+=4) {
-      const r=a[i], g=a[i+1], b=a[i+2];
-      const contraste = Math.max(r,g-11,b-37) - Math.max(0,b-r-12)*.32;
-      a[i+3] = Math.round(255*recorta((contraste-29)/37,0,1));
-    }
-    pixeles.putImageData(imagen,0,0);
-    lista = true;
-    original.hidden = true;
-    lienzo.hidden = false;
-    $("pista").hidden = false;
-    dibujar();
-  } catch {
-    original.hidden = false;
-    lienzo.hidden = true;
-    $("pista").hidden = true;
-  }
-}
-
-function dibujar() {
-  if (!lista || cuadro) return;
-  cuadro = requestAnimationFrame(() => {
-    cuadro = 0;
-    const w=escena.clientWidth, h=escena.clientHeight;
-    if (!w || !h) return;
-    const d=Math.min(devicePixelRatio||1,2);
-    if (lienzo.width!==Math.round(w*d) || lienzo.height!==Math.round(h*d)) {
-      lienzo.width=Math.round(w*d);
-      lienzo.height=Math.round(h*d);
-    }
-    ctx.setTransform(d,0,0,d,0,0);
-    ctx.clearRect(0,0,w,h);
-    const escala=Math.min(w*.98,h*1.48);
-    const alto=escala*textura.height/textura.width;
-    const c=Math.cos(angulo), s=Math.sin(angulo);
-    const n=150, tiras=[];
-
-    function proyectar(u) {
-      const x=u-.5;
-      const z=.56*(Math.sqrt(Math.max(0,1-3.5*x*x))-1);
-      const profundidad=z*c-x*s;
-      const perspectiva=1/(1-profundidad*.38*Math.abs(s));
-      return [w/2+escala*(x*c+z*s)*perspectiva,profundidad,perspectiva];
-    }
-
-    for (let j=0;j<n;j++) {
-      const p=proyectar(j/n), q=proyectar((j+1)/n);
-      tiras.push([j,p[0],q[0],(p[1]+q[1])*.5,(p[2]+q[2])*.5]);
-    }
-    tiras.sort((a,b)=>a[3]-b[3]);
-
-    for (const [j,x0,x1,z,p] of tiras) {
-      const ancho=Math.abs(x1-x0), signo=Math.sign(x1-x0);
-      if (ancho<.01) continue;
-      const sombra=recorta((1-c)*.13+Math.max(0,-z)*.65,0,.5);
-      const volumen=1+(p-1)*Math.abs(s);
-      ctx.globalAlpha=1-sombra;
-      ctx.setTransform(d*signo,0,0,d*volumen,d*x0,d*(h-alto*volumen)/2);
-      ctx.drawImage(textura,j*textura.width/n,0,textura.width/n,textura.height,
-        -.20,0,ancho+.40,alto);
-    }
-    ctx.globalAlpha=1;
-  });
-}
-
-if (original.complete) preparar();
-else original.addEventListener("load",preparar,{once:true});
-
-new ResizeObserver(dibujar).observe(escena);
-
-escena.addEventListener("pointerdown",e=>{
-  if (!lista || !e.isPrimary || (e.pointerType==="mouse" && e.button!==0)) return;
-  dedo={id:e.pointerId,x:e.clientX,a:angulo};
-  escena.setPointerCapture(e.pointerId);
-});
-
-escena.addEventListener("pointermove",e=>{
-  if (!dedo || dedo.id!==e.pointerId) return;
-  angulo=recorta(dedo.a+(e.clientX-dedo.x)*.012,-limite,limite);
-  dibujar();
-});
-
-for (const evento of ["pointerup","pointercancel","lostpointercapture"]) {
-  escena.addEventListener(evento,e=>{if(dedo?.id===e.pointerId) dedo=null;});
-}
-
-escena.addEventListener("keydown",e=>{
-  if (!lista || !["ArrowLeft","ArrowRight","Home"].includes(e.key)) return;
-  e.preventDefault();
-  const paso=e.key==="ArrowRight" ? .27 : -.27;
-  angulo=e.key==="Home" ? 0 : recorta(angulo+paso,-limite,limite);
-  dibujar();
-});
-
-const fotos = [
-  ["file_00000000ee14820e805ad75c1e1cc244.png","Fuerza",
-    "Eres fuerte, princesa. Y lo serás mucho más.",
-    "No porque todo te salga bien, sino porque ya sabes volver a intentarlo cuando algo no sale como querías.",
-    "De pie en la cancha con su corona"],
-  ["file_0000000034e8820e94d044cd4c314783.png","Cabeza en alto",
-    "Un mal día no te quita la corona.",
-    "Si hoy te toca parar y tomar aire, hazlo. No tienes que demostrarle nada a nadie.",
-    "Retrato con corona y maquillaje de estrellas"],
-  ["file_000000004750820e93d5376edefb118a.png","Inspiración",
-    "Eres una inspiración para quienes te conocen.",
-    "Yo admiro algo de ti que quizá tú no siempre notas: incluso cuando dudas, te animas a dar el siguiente paso.",
-    "Selfie con corona, chompa y bolsa de compras"],
-  ["file_0000000085a8820ebefc9788720b5c88.png","También puedes dejarte cuidar",
-    "Eres una luchadora, princesa. Eso ya lo sabemos.",
-    "Pero con quienes te queremos no tienes que estar siempre en guardia. También se vale dejarte cuidar y, sí, consentir un poquito.",
-    "Selfie con corona, lentes y una lata de Fanta"]
-];
-
-let i=0, contacto=null, deslice=0;
-
-function vista(id,foco) {
-  for(const v of ["inicio","galeria","cierre"]) $(v).hidden=v!==id;
-  window.scrollTo(0,0);
-  $(foco).focus({preventScroll:true});
-  if(id==="inicio") dibujar();
-}
-
-function foto(n) {
-  if(n<0||n>=fotos.length) return;
-  i=n;
-  const [archivo,tema,frase,nota,alt]=fotos[i];
-  $("foto").src="./img/"+archivo;
-  $("foto").alt=alt;
-  $("tema").textContent=tema;
-  $("frase").textContent=frase;
-  $("nota").textContent=nota;
-  $("numero").textContent=`${i+1} / ${fotos.length}`;
-  $("anterior").disabled=i===0;
-  $("siguiente").textContent=i===fotos.length-1?"Ver cierre →":"Siguiente →";
-}
-
-function entrar() {
-  foto(0);
-  vista("galeria","frase");
-}
-
-$("entrar").onclick=$("repetir").onclick=entrar;
-$("volver").onclick=()=>vista("inicio","portada");
-$("anterior").onclick=()=>foto(i-1);
-$("siguiente").onclick=()=>i<fotos.length-1?foto(i+1):vista("cierre","ultima");
-
-$("ampliar").onclick=()=>{
-  if(!$("foto").naturalWidth || Date.now()-deslice<450) return;
-  $("grande").src=$("foto").src;
-  $("grande").alt=$("foto").alt;
-  $("visor").showModal();
-};
-
-$("galeria").addEventListener("keydown",e=>{
-  if(!["ArrowLeft","ArrowRight"].includes(e.key)) return;
-  e.preventDefault();
-  foto(i+(e.key==="ArrowRight"?1:-1));
-});
-
-$("ampliar").addEventListener("touchstart",e=>{
-  const t=e.touches[0];
-  contacto=e.touches.length===1?[t.clientX,t.clientY]:null;
-},{passive:true});
-
-$("ampliar").addEventListener("touchcancel",()=>{contacto=null;});
-
-$("ampliar").addEventListener("touchend",e=>{
-  if(!contacto) return;
-  const t=e.changedTouches[0], dx=t.clientX-contacto[0], dy=t.clientY-contacto[1];
-  contacto=null;
-  if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy)*1.5){
-    deslice=Date.now();
-    foto(i+(dx<0?1:-1));
-  }
-},{passive:true});
-</script>
+  <main>
+    <h1>Hoy se acostumbra regalar tiaras y esta es para ti, princesa.</h1>
+    <img
+      src="./img/file_0000000085a8820ebefc9788720b5c88.png"
+      alt="Selfie con tiara plateada, lentes y una lata de Fanta de uva">
+  </main>
 </body>
 </html>
