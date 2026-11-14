@@ -56,8 +56,8 @@ dialog img{display:block;max-width:100%;max-height:78svh;margin:auto}
 <header><small>Para ti</small></header>
 
 <section class="home" id="inicio">
-  <h1 id="portada" tabindex="-1">No olvides de qué eres capaz.</h1>
-  <p>Eres fuerte, princesa. Y lo serás mucho más.</p>
+  <h1 id="portada" tabindex="-1">Si vas a agachar la cabeza, que sea para que te pongan la corona.</h1>
+  <p>Después, cabeza en alto, princesa. Mira todo lo que ya has logrado.</p>
   <div class="stage" id="escena" tabindex="0"
        aria-label="Corona plateada. Arrastra de lado o usa las flechas para girarla.">
     <img id="original" src="./img/corona.jpg" draggable="false"
@@ -90,8 +90,8 @@ dialog img{display:block;max-width:100%;max-height:78svh;margin:auto}
 </section>
 
 <section class="finish" id="cierre" hidden>
-  <h2 id="ultima" tabindex="-1">Y esto recién empieza.</h2>
-  <p>Admiro quién eres. Y confío en lo que puedes llegar a ser.</p>
+  <h2 id="ultima" tabindex="-1">Sé que puedes. Y sé que vas a llegar lejos.</h2>
+  <p>Pero no tienes que llegar sola ni esperar a que todo te pese para contar conmigo. Si quieres una mano, te la doy. Y si solo quieres compañía, me quedo a tu lado.</p>
   <button id="repetir" type="button">Volver a ver las fotos</button>
 </section>
 
@@ -187,19 +187,23 @@ if (original.complete) preparar();
 else original.addEventListener("load",preparar,{once:true});
 
 new ResizeObserver(dibujar).observe(escena);
+
 escena.addEventListener("pointerdown",e=>{
   if (!lista || !e.isPrimary || (e.pointerType==="mouse" && e.button!==0)) return;
   dedo={id:e.pointerId,x:e.clientX,a:angulo};
   escena.setPointerCapture(e.pointerId);
 });
+
 escena.addEventListener("pointermove",e=>{
   if (!dedo || dedo.id!==e.pointerId) return;
   angulo=recorta(dedo.a+(e.clientX-dedo.x)*.012,-limite,limite);
   dibujar();
 });
+
 for (const evento of ["pointerup","pointercancel","lostpointercapture"]) {
   escena.addEventListener(evento,e=>{if(dedo?.id===e.pointerId) dedo=null;});
 }
+
 escena.addEventListener("keydown",e=>{
   if (!lista || !["ArrowLeft","ArrowRight","Home"].includes(e.key)) return;
   e.preventDefault();
@@ -210,20 +214,20 @@ escena.addEventListener("keydown",e=>{
 
 const fotos = [
   ["file_00000000ee14820e805ad75c1e1cc244.png","Fuerza",
-    "Ya has demostrado de qué eres capaz.",
-    "Que un día difícil no te haga olvidarlo.",
+    "Eres fuerte, princesa. Y lo serás mucho más.",
+    "No porque todo te salga bien, sino porque ya sabes volver a intentarlo cuando algo no sale como querías.",
     "De pie en la cancha con su corona"],
   ["file_0000000034e8820e94d044cd4c314783.png","Cabeza en alto",
-    "Descansar no te quita fuerza.",
-    "Si hoy bajas la cabeza para tomar aire, la corona sigue ahí.",
+    "Un mal día no te quita la corona.",
+    "Si hoy te toca parar y tomar aire, hazlo. No tienes que demostrarle nada a nadie.",
     "Retrato con corona y maquillaje de estrellas"],
   ["file_000000004750820e93d5376edefb118a.png","Inspiración",
     "Eres una inspiración para quienes te conocen.",
-    "Puede que tú no siempre lo notes. Yo sí.",
+    "Yo admiro algo de ti que quizá tú no siempre notas: incluso cuando dudas, te animas a dar el siguiente paso.",
     "Selfie con corona, chompa y bolsa de compras"],
-  ["file_0000000085a8820ebefc9788720b5c88.png","Admiración",
-    "Eres alguien de admirar.",
-    "No tienes que convertirte en nadie más para merecerlo.",
+  ["file_0000000085a8820ebefc9788720b5c88.png","También puedes dejarte cuidar",
+    "Eres una luchadora, princesa. Eso ya lo sabemos.",
+    "Pero con quienes te queremos no tienes que estar siempre en guardia. También se vale dejarte cuidar y, sí, consentir un poquito.",
     "Selfie con corona, lentes y una lata de Fanta"]
 ];
 
@@ -259,6 +263,7 @@ $("entrar").onclick=$("repetir").onclick=entrar;
 $("volver").onclick=()=>vista("inicio","portada");
 $("anterior").onclick=()=>foto(i-1);
 $("siguiente").onclick=()=>i<fotos.length-1?foto(i+1):vista("cierre","ultima");
+
 $("ampliar").onclick=()=>{
   if(!$("foto").naturalWidth || Date.now()-deslice<450) return;
   $("grande").src=$("foto").src;
