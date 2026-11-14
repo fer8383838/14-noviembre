@@ -3,309 +3,291 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#0b1320">
-<title>Para cuando lo necesites</title>
+<meta name="theme-color" content="#080d18">
+<title>Cabeza en alto</title>
 <style>
-  :root {
-    color-scheme: dark;
-    --fondo: #0b1320;
-    --panel: #142233;
-    --texto: #f0f3f7;
-    --suave: #b5c4d5;
-    --plata: #d9e3ef;
-    --borde: #364c65;
-  }
-  * { box-sizing: border-box }
-  [hidden] { display: none !important }
-  body {
-    margin: 0;
-    color: var(--texto);
-    background: radial-gradient(ellipse at top, #223a54, var(--fondo) 65%);
-    font: 16px/1.5 system-ui, sans-serif;
-  }
-  main { width: min(940px, calc(100% - 28px)); margin: auto }
-  section { padding: clamp(24px, 5vw, 58px) 0 }
-  .portada, .cierre { text-align: center }
-  .ceja {
-    margin: 0 0 14px;
-    color: var(--suave);
-    font-size: .73rem;
-    font-weight: 700;
-    letter-spacing: .17em;
-    text-transform: uppercase;
-  }
-  h1, h2 {
-    margin: 0 0 12px;
-    font: 400 clamp(2.25rem, 5.5vw, 4.7rem)/1.05 Georgia, serif;
-    text-wrap: balance;
-  }
-  p { margin: 0 0 18px; color: var(--suave) }
-  button {
-    min-height: 44px;
-    padding: 8px 14px;
-    border: 1px solid var(--borde);
-    border-radius: 6px;
-    background: var(--panel);
-    color: var(--texto);
-    font: inherit;
-    cursor: pointer;
-  }
-  button:focus-visible, input:focus-visible {
-    outline: 2px solid var(--plata);
-    outline-offset: 4px;
-  }
-  button:disabled { opacity: .42; cursor: default }
-  .principal { background: var(--plata); color: var(--fondo); font-weight: 750 }
-  .escena {
-    width: min(77vw, 410px);
-    margin: 26px auto 15px;
-    perspective: 850px;
-    touch-action: none;
-    user-select: none;
-    cursor: grab;
-  }
-  .escena:active { cursor: grabbing }
-  #tiara {
-    display: block;
-    width: 100%;
-    height: auto;
-    border: 1px solid #c5d6eb66;
-    border-radius: 12px;
-    box-shadow: 0 16px 42px #0008;
-    pointer-events: none;
-    transform: rotateX(var(--x, 0deg)) rotateY(var(--y, 0deg));
-    transition: transform .18s ease-out;
-  }
-  .escena.arrastrando #tiara { transition: none }
-  .giro {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 9px 12px;
-    margin-bottom: 22px;
-  }
-  .giro label { color: var(--suave); font-size: .85rem }
-  .giro input { width: min(36vw, 170px); accent-color: var(--plata) }
-  .giro button { font-size: .82rem }
-  .tarjeta {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    overflow: hidden;
-    background: var(--panel);
-    border: 1px solid var(--borde);
-    border-radius: 12px;
-  }
-  .foto {
-    position: relative;
-    display: block;
-    width: 100%;
-    height: clamp(310px, 67svh, 580px);
-    border: 0;
-    border-radius: 0;
-    background: #080f19;
-    padding: 0;
-    touch-action: pan-y;
-  }
-  .foto img { display: block; width: 100%; height: 100%; object-fit: contain }
-  .foto span {
-    position: absolute;
-    bottom: 9px;
-    right: 9px;
-    padding: 4px 8px;
-    border-radius: 4px;
-    background: #0b1320ee;
-    font-size: .75rem;
-  }
-  .nota { align-self: center; padding: clamp(18px, 4vw, 50px) }
-  .nota h2 { font-size: clamp(1.9rem, 4vw, 3.6rem) }
-  .controles { display: flex; align-items: center; justify-content: space-between; gap: 8px }
-  #numero { color: var(--suave); font-size: .85rem }
-  .cierre { padding-top: 20vh }
-  dialog {
-    max-width: 94vw;
-    max-height: 94svh;
-    padding: 8px;
-    border: 1px solid var(--borde);
-    border-radius: 8px;
-    background: var(--fondo);
-  }
-  dialog::backdrop { background: #03070ce8 }
-  dialog form { text-align: right; margin-bottom: 6px }
-  dialog img { display: block; max-width: 100%; max-height: 78svh; margin: auto }
-  @media (max-width: 650px) {
-    .tarjeta { grid-template-columns: 1fr }
-    .foto { height: clamp(235px, 45svh, 430px) }
-  }
-  @media (prefers-reduced-motion: reduce) { #tiara { transition: none } }
+:root{color-scheme:dark;--ink:#f4f6fa;--muted:#b9c5d8;--edge:#91a8c440;--ice:#dce8f7}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:radial-gradient(ellipse at 50% 28%,#1b2e4b,#0d1729 42%,#080d18 79%) fixed;color:var(--ink);font:16px/1.5 system-ui,sans-serif}
+main{width:min(94%,850px);margin:auto}
+header{display:flex;align-items:center;gap:12px;padding:20px 0;border-bottom:1px solid var(--edge)}
+small,.eyebrow{font-size:.71rem;font-weight:650;letter-spacing:.19em;text-transform:uppercase;color:var(--muted)}
+header::before{content:"";width:6px;height:6px;background:#badaff;transform:rotate(45deg);box-shadow:0 0 14px #9cceff}
+.home{text-align:center;padding:clamp(24px,6vh,65px) 0 30px}
+h1,h2{margin:0 0 14px;font:400 clamp(2.7rem,8vw,5.2rem)/.98 Georgia,serif;letter-spacing:-.045em;text-wrap:balance}
+p{margin:0;color:var(--muted)}
+.home>p{font-size:clamp(.96rem,2.6vw,1.15rem)}
+.stage{position:relative;width:min(100%,590px);aspect-ratio:1.58;margin:8px auto 2px;display:grid;place-items:center;cursor:grab;touch-action:pan-y;user-select:none;isolation:isolate}
+.stage:active{cursor:grabbing}
+.stage::before{content:"";position:absolute;inset:4% 6%;background:radial-gradient(ellipse,#608ac139,transparent 68%);z-index:-1}
+.stage canvas,.stage img{width:100%;height:100%;object-fit:contain;display:block;position:absolute;inset:0}
+.stage img{mask-image:radial-gradient(ellipse,#000 52%,transparent 76%)}
+.hint{margin:0 0 20px;font-size:.83rem!important}
+.hint span{margin-right:7px;color:var(--ice)}
+button{font:inherit;min-height:44px;border:1px solid var(--edge);color:var(--ink);background:#101c2c;padding:8px 15px;border-radius:5px;cursor:pointer}
+button:hover{border-color:var(--ice)}
+button:disabled{opacity:.35;cursor:default}
+button:focus-visible,.stage:focus-visible{outline:2px solid #cfe5ff;outline-offset:3px}
+.solid{color:#0c1523;background:var(--ice);border-color:var(--ice);font-weight:735}
+.link{background:none;border:0;text-decoration:underline;text-underline-offset:4px;color:var(--muted);padding-inline:0}
+.gallery{padding:16px 0 30px}
+.card{display:grid;grid-template-columns:1fr 1fr;background:#131e2ef0;border:1px solid var(--edge);border-radius:10px;overflow:hidden}
+.picture{position:relative;background:#080e19;min-height:430px;padding:0;border:0;border-radius:0;touch-action:pan-y}
+.picture img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.copy{padding:clamp(18px,4vw,46px);align-self:center}
+.copy h2{font-size:clamp(2rem,5vw,3.45rem);margin-top:12px}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:8px;border-top:1px solid var(--edge);margin-top:21px;padding-top:12px}
+.nav span{font-variant-numeric:tabular-nums;color:var(--muted);font-size:.87rem}
+.finish{text-align:center;padding:clamp(70px,16vh,170px) 0}
+.finish p{margin-bottom:22px}
+dialog{padding:8px;background:#080e19;border:1px solid var(--edge);max-width:95vw;max-height:94svh}
+dialog::backdrop{background:#03070de8}
+dialog form{text-align:right;margin-bottom:6px}
+dialog img{display:block;max-width:100%;max-height:78svh;margin:auto}
+@media(max-width:620px){
+  .card{grid-template-columns:1fr}
+  .picture{min-height:0;height:clamp(245px,48svh,440px)}
+}
 </style>
 </head>
 <body>
 <main>
-  <section id="portada" class="portada">
-    <p class="ceja">Un recordatorio</p>
-    <h1>Eres fuerte, princesa.</h1>
-    <p>Y lo serás mucho más.</p>
+<header><small>Para ti</small></header>
 
-    <div id="escena" class="escena">
-      <img id="tiara" src="./img/corona.jpg"
-           alt="La corona plateada de la foto, con filigrana y un cristal central">
-    </div>
-    <p id="faltaCorona" hidden>No se encontró la foto en img/corona.jpg.</p>
+<section class="home" id="inicio">
+  <h1 id="portada" tabindex="-1">No olvides de qué eres capaz.</h1>
+  <p>Eres fuerte, princesa. Y lo serás mucho más.</p>
+  <div class="stage" id="escena" tabindex="0"
+       aria-label="Corona plateada. Arrastra de lado o usa las flechas para girarla.">
+    <img id="original" src="./img/corona.jpg" draggable="false"
+         alt="Corona plateada con filigrana y una piedra central">
+    <canvas id="corona" aria-hidden="true" hidden></canvas>
+  </div>
+  <p class="hint" id="pista" hidden><span aria-hidden="true">↔</span>Arrastra la corona de lado a lado</p>
+  <button class="solid" id="entrar" type="button">Ver las fotos →</button>
+</section>
 
-    <div class="giro" id="controlesGiro">
-      <label for="angulo">Arrastra o desliza para girar</label>
-      <input id="angulo" type="range" min="-28" max="28" value="0">
-      <button id="centrar" type="button">Centrar</button>
-    </div>
-    <button id="empezar" class="principal" type="button">Ver las fotos →</button>
-  </section>
-
-  <section id="galeria" aria-label="Galería de fotos" hidden>
-    <article class="tarjeta">
-      <button id="abrirFoto" class="foto" type="button" aria-label="Ver foto completa">
-        <img id="foto" alt="">
-        <span id="estadoFoto">Ver foto completa</span>
-      </button>
-      <div class="nota">
-        <div aria-live="polite" aria-atomic="true">
-          <p id="tema" class="ceja"></p>
-          <h2 id="frase" tabindex="-1"></h2>
-          <p id="detalle"></p>
-        </div>
-        <div class="controles">
-          <button id="anterior" type="button" aria-label="Foto anterior">←</button>
-          <span id="numero"></span>
-          <button id="siguiente" class="principal" type="button">Siguiente →</button>
-        </div>
+<section class="gallery" id="galeria" aria-label="Galería" hidden>
+  <button class="link" id="volver" type="button">← Portada</button>
+  <article class="card">
+    <button id="ampliar" class="picture" type="button" aria-label="Ver foto completa">
+      <img id="foto" alt="">
+    </button>
+    <div class="copy">
+      <div aria-live="polite">
+        <small class="eyebrow" id="tema"></small>
+        <h2 id="frase" tabindex="-1"></h2>
+        <p id="nota"></p>
       </div>
-    </article>
-  </section>
+      <div class="nav">
+        <button id="anterior" type="button" aria-label="Foto anterior">←</button>
+        <span id="numero"></span>
+        <button id="siguiente" class="solid" type="button">Siguiente →</button>
+      </div>
+    </div>
+  </article>
+</section>
 
-  <section id="cierre" class="cierre" hidden>
-    <h2 id="final" tabindex="-1">Y esto recién empieza.</h2>
-    <p>Admiro a la persona que eres. Y confío en la que estás llegando a ser.</p>
-    <button id="volver" type="button">Volver a la corona</button>
-  </section>
-</main>
+<section class="finish" id="cierre" hidden>
+  <h2 id="ultima" tabindex="-1">Y esto recién empieza.</h2>
+  <p>Admiro quién eres. Y confío en lo que puedes llegar a ser.</p>
+  <button id="repetir" type="button">Volver a ver las fotos</button>
+</section>
 
 <dialog id="visor" aria-label="Foto completa">
   <form method="dialog"><button aria-label="Cerrar foto" autofocus>×</button></form>
-  <img id="fotoGrande" alt="">
+  <img id="grande" alt="">
 </dialog>
+</main>
 
 <script>
-  const $ = id => document.getElementById(id);
-  const entre = (valor, min, max) => Math.min(max, Math.max(min, valor));
-  const escena = $("escena");
-  const tiara = $("tiara");
-  const angulo = $("angulo");
-  let x = 0, y = 0, arrastre = null;
+const $ = id => document.getElementById(id);
+const escena = $("escena"), original = $("original"), lienzo = $("corona");
+const ctx = lienzo.getContext("2d");
+const textura = document.createElement("canvas");
+const pixeles = textura.getContext("2d", {willReadFrequently:true});
+const recorta = (v,a,b) => Math.max(a,Math.min(b,v));
+const limite = 1.05;
+let angulo = 0, dedo = null, lista = false, cuadro = 0;
 
-  function girar(nuevoX, nuevoY) {
-    x = entre(nuevoX, -14, 14);
-    y = entre(nuevoY, -28, 28);
-    tiara.style.setProperty("--x", x + "deg");
-    tiara.style.setProperty("--y", y + "deg");
-    angulo.value = Math.round(y);
-  }
-
-  escena.addEventListener("pointerdown", e => {
-    if (arrastre || e.button !== 0) return;
-    arrastre = { id: e.pointerId, px: e.clientX, py: e.clientY, x, y };
-    escena.setPointerCapture(e.pointerId);
-    escena.classList.add("arrastrando");
-  });
-
-  escena.addEventListener("pointermove", e => {
-    if (!arrastre || e.pointerId !== arrastre.id) return;
-    girar(
-      arrastre.x - (e.clientY - arrastre.py) * .17,
-      arrastre.y + (e.clientX - arrastre.px) * .19
-    );
-  });
-
-  for (const evento of ["pointerup", "pointercancel", "lostpointercapture"]) {
-    escena.addEventListener(evento, e => {
-      if (!arrastre || e.pointerId !== arrastre.id) return;
-      arrastre = null;
-      escena.classList.remove("arrastrando");
-    });
-  }
-
-  angulo.addEventListener("input", () => girar(0, Number(angulo.value)));
-  $("centrar").addEventListener("click", () => girar(0, 0));
-
-  function coronaNoEncontrada() {
-    escena.hidden = true;
-    $("controlesGiro").hidden = true;
-    $("faltaCorona").hidden = false;
-  }
-  tiara.addEventListener("error", coronaNoEncontrada);
-  if (tiara.complete && !tiara.naturalWidth) coronaNoEncontrada();
-
-  const momentos = [
-    {
-      foto: "file_00000000ee14820e805ad75c1e1cc244.png",
-      tema: "Fuerza",
-      frase: "Eres fuerte, princesa.",
-      detalle: "Y lo serás mucho más. Ya has demostrado que sabes seguir incluso cuando cuesta.",
-      alt: "De pie en la cancha con la corona plateada"
-    },
-    {
-      foto: "file_0000000034e8820e94d044cd4c314783.png",
-      tema: "Cabeza en alto",
-      frase: "Que un mal día no te haga olvidar quién eres.",
-      detalle: "Si hoy tienes que bajar la cabeza para descansar, hazlo. La corona sigue ahí.",
-      alt: "Retrato con corona y maquillaje de estrellas"
-    },
-    {
-      foto: "file_000000004750820e93d5376edefb118a.png",
-      tema: "Inspiración",
-      frase: "Eres una inspiración para los que te conocen.",
-      detalle: "Tal vez tú no siempre lo ves. Desde fuera se nota.",
-      alt: "Selfie en la tienda con corona, chompa y bolsa"
-    },
-    {
-      foto: "file_0000000085a8820ebefc9788720b5c88.png",
-      tema: "Admiración",
-      frase: "Eres alguien de admirar.",
-      detalle: "No por lo que tienes que llegar a ser, sino por quien ya eres.",
-      alt: "Selfie con corona, lentes y una lata de Fanta"
+function preparar() {
+  if (!ctx || !pixeles || !original.naturalWidth) return;
+  try {
+    const w = 760, h = Math.round(w * original.naturalHeight / original.naturalWidth);
+    textura.width = w;
+    textura.height = h;
+    pixeles.drawImage(original,0,0,w,h);
+    const imagen = pixeles.getImageData(0,0,w,h), a = imagen.data;
+    for (let i=0; i<a.length; i+=4) {
+      const r=a[i], g=a[i+1], b=a[i+2];
+      const contraste = Math.max(r,g-11,b-37) - Math.max(0,b-r-12)*.32;
+      a[i+3] = Math.round(255*recorta((contraste-29)/37,0,1));
     }
-  ];
+    pixeles.putImageData(imagen,0,0);
+    lista = true;
+    original.hidden = true;
+    lienzo.hidden = false;
+    $("pista").hidden = false;
+    dibujar();
+  } catch {
+    original.hidden = false;
+    lienzo.hidden = true;
+    $("pista").hidden = true;
+  }
+}
 
-  let actual = 0, toque = null, ultimoDeslizamiento = 0;
-
-  function seccion(id, foco) {
-    for (const nombre of ["portada", "galeria", "cierre"]) {
-      $(nombre).hidden = nombre !== id;
+function dibujar() {
+  if (!lista || cuadro) return;
+  cuadro = requestAnimationFrame(() => {
+    cuadro = 0;
+    const w=escena.clientWidth, h=escena.clientHeight;
+    if (!w || !h) return;
+    const d=Math.min(devicePixelRatio||1,2);
+    if (lienzo.width!==Math.round(w*d) || lienzo.height!==Math.round(h*d)) {
+      lienzo.width=Math.round(w*d);
+      lienzo.height=Math.round(h*d);
     }
-    window.scrollTo(0, 0);
-    $(foco).focus({ preventScroll: true });
-  }
+    ctx.setTransform(d,0,0,d,0,0);
+    ctx.clearRect(0,0,w,h);
+    const escala=Math.min(w*.98,h*1.48);
+    const alto=escala*textura.height/textura.width;
+    const c=Math.cos(angulo), s=Math.sin(angulo);
+    const n=150, tiras=[];
 
-  function mostrar(i) {
-    if (i < 0 || i >= momentos.length) return;
-    actual = i;
-    const m = momentos[i];
-    $("foto").alt = m.alt;
-    $("estadoFoto").textContent = "Ver foto completa";
-    $("foto").src = "./img/" + m.foto;
-    $("tema").textContent = m.tema;
-    $("frase").textContent = m.frase;
-    $("detalle").textContent = m.detalle;
-    $("numero").textContent = (i + 1) + " / " + momentos.length;
-    $("anterior").disabled = i === 0;
-    $("siguiente").textContent = i === momentos.length - 1
-      ? "Ver cierre →" : "Siguiente →";
-  }
+    function proyectar(u) {
+      const x=u-.5;
+      const z=.56*(Math.sqrt(Math.max(0,1-3.5*x*x))-1);
+      const profundidad=z*c-x*s;
+      const perspectiva=1/(1-profundidad*.38*Math.abs(s));
+      return [w/2+escala*(x*c+z*s)*perspectiva,profundidad,perspectiva];
+    }
 
-  $("empezar").addEventListener("click", () => {
-    mostrar(0);
-    seccion("galeria", "frase");
+    for (let j=0;j<n;j++) {
+      const p=proyectar(j/n), q=proyectar((j+1)/n);
+      tiras.push([j,p[0],q[0],(p[1]+q[1])*.5,(p[2]+q[2])*.5]);
+    }
+    tiras.sort((a,b)=>a[3]-b[3]);
+
+    for (const [j,x0,x1,z,p] of tiras) {
+      const ancho=Math.abs(x1-x0), signo=Math.sign(x1-x0);
+      if (ancho<.01) continue;
+      const sombra=recorta((1-c)*.13+Math.max(0,-z)*.65,0,.5);
+      const volumen=1+(p-1)*Math.abs(s);
+      ctx.globalAlpha=1-sombra;
+      ctx.setTransform(d*signo,0,0,d*volumen,d*x0,d*(h-alto*volumen)/2);
+      ctx.drawImage(textura,j*textura.width/n,0,textura.width/n,textura.height,
+        -.20,0,ancho+.40,alto);
+    }
+    ctx.globalAlpha=1;
   });
-  $("volver").addEventListener("click", () => seccion("portada", "empezar"));
-  $("anterior").addEventListener("click", () => mostrar(actual - 1));
-  $("siguiente").addEventListener("click", () => {
-    if (actual < momentos
+}
+
+if (original.complete) preparar();
+else original.addEventListener("load",preparar,{once:true});
+
+new ResizeObserver(dibujar).observe(escena);
+escena.addEventListener("pointerdown",e=>{
+  if (!lista || !e.isPrimary || (e.pointerType==="mouse" && e.button!==0)) return;
+  dedo={id:e.pointerId,x:e.clientX,a:angulo};
+  escena.setPointerCapture(e.pointerId);
+});
+escena.addEventListener("pointermove",e=>{
+  if (!dedo || dedo.id!==e.pointerId) return;
+  angulo=recorta(dedo.a+(e.clientX-dedo.x)*.012,-limite,limite);
+  dibujar();
+});
+for (const evento of ["pointerup","pointercancel","lostpointercapture"]) {
+  escena.addEventListener(evento,e=>{if(dedo?.id===e.pointerId) dedo=null;});
+}
+escena.addEventListener("keydown",e=>{
+  if (!lista || !["ArrowLeft","ArrowRight","Home"].includes(e.key)) return;
+  e.preventDefault();
+  const paso=e.key==="ArrowRight" ? .27 : -.27;
+  angulo=e.key==="Home" ? 0 : recorta(angulo+paso,-limite,limite);
+  dibujar();
+});
+
+const fotos = [
+  ["file_00000000ee14820e805ad75c1e1cc244.png","Fuerza",
+    "Ya has demostrado de qué eres capaz.",
+    "Que un día difícil no te haga olvidarlo.",
+    "De pie en la cancha con su corona"],
+  ["file_0000000034e8820e94d044cd4c314783.png","Cabeza en alto",
+    "Descansar no te quita fuerza.",
+    "Si hoy bajas la cabeza para tomar aire, la corona sigue ahí.",
+    "Retrato con corona y maquillaje de estrellas"],
+  ["file_000000004750820e93d5376edefb118a.png","Inspiración",
+    "Eres una inspiración para quienes te conocen.",
+    "Puede que tú no siempre lo notes. Yo sí.",
+    "Selfie con corona, chompa y bolsa de compras"],
+  ["file_0000000085a8820ebefc9788720b5c88.png","Admiración",
+    "Eres alguien de admirar.",
+    "No tienes que convertirte en nadie más para merecerlo.",
+    "Selfie con corona, lentes y una lata de Fanta"]
+];
+
+let i=0, contacto=null, deslice=0;
+
+function vista(id,foco) {
+  for(const v of ["inicio","galeria","cierre"]) $(v).hidden=v!==id;
+  window.scrollTo(0,0);
+  $(foco).focus({preventScroll:true});
+  if(id==="inicio") dibujar();
+}
+
+function foto(n) {
+  if(n<0||n>=fotos.length) return;
+  i=n;
+  const [archivo,tema,frase,nota,alt]=fotos[i];
+  $("foto").src="./img/"+archivo;
+  $("foto").alt=alt;
+  $("tema").textContent=tema;
+  $("frase").textContent=frase;
+  $("nota").textContent=nota;
+  $("numero").textContent=`${i+1} / ${fotos.length}`;
+  $("anterior").disabled=i===0;
+  $("siguiente").textContent=i===fotos.length-1?"Ver cierre →":"Siguiente →";
+}
+
+function entrar() {
+  foto(0);
+  vista("galeria","frase");
+}
+
+$("entrar").onclick=$("repetir").onclick=entrar;
+$("volver").onclick=()=>vista("inicio","portada");
+$("anterior").onclick=()=>foto(i-1);
+$("siguiente").onclick=()=>i<fotos.length-1?foto(i+1):vista("cierre","ultima");
+$("ampliar").onclick=()=>{
+  if(!$("foto").naturalWidth || Date.now()-deslice<450) return;
+  $("grande").src=$("foto").src;
+  $("grande").alt=$("foto").alt;
+  $("visor").showModal();
+};
+
+$("galeria").addEventListener("keydown",e=>{
+  if(!["ArrowLeft","ArrowRight"].includes(e.key)) return;
+  e.preventDefault();
+  foto(i+(e.key==="ArrowRight"?1:-1));
+});
+
+$("ampliar").addEventListener("touchstart",e=>{
+  const t=e.touches[0];
+  contacto=e.touches.length===1?[t.clientX,t.clientY]:null;
+},{passive:true});
+
+$("ampliar").addEventListener("touchcancel",()=>{contacto=null;});
+
+$("ampliar").addEventListener("touchend",e=>{
+  if(!contacto) return;
+  const t=e.changedTouches[0], dx=t.clientX-contacto[0], dy=t.clientY-contacto[1];
+  contacto=null;
+  if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy)*1.5){
+    deslice=Date.now();
+    foto(i+(dx<0?1:-1));
+  }
+},{passive:true});
+</script>
+</body>
+</html>
