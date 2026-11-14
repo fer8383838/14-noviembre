@@ -1,1 +1,311 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1320">
+<title>Para cuando lo necesites</title>
+<style>
+  :root {
+    color-scheme: dark;
+    --fondo: #0b1320;
+    --panel: #142233;
+    --texto: #f0f3f7;
+    --suave: #b5c4d5;
+    --plata: #d9e3ef;
+    --borde: #364c65;
+  }
+  * { box-sizing: border-box }
+  [hidden] { display: none !important }
+  body {
+    margin: 0;
+    color: var(--texto);
+    background: radial-gradient(ellipse at top, #223a54, var(--fondo) 65%);
+    font: 16px/1.5 system-ui, sans-serif;
+  }
+  main { width: min(940px, calc(100% - 28px)); margin: auto }
+  section { padding: clamp(24px, 5vw, 58px) 0 }
+  .portada, .cierre { text-align: center }
+  .ceja {
+    margin: 0 0 14px;
+    color: var(--suave);
+    font-size: .73rem;
+    font-weight: 700;
+    letter-spacing: .17em;
+    text-transform: uppercase;
+  }
+  h1, h2 {
+    margin: 0 0 12px;
+    font: 400 clamp(2.25rem, 5.5vw, 4.7rem)/1.05 Georgia, serif;
+    text-wrap: balance;
+  }
+  p { margin: 0 0 18px; color: var(--suave) }
+  button {
+    min-height: 44px;
+    padding: 8px 14px;
+    border: 1px solid var(--borde);
+    border-radius: 6px;
+    background: var(--panel);
+    color: var(--texto);
+    font: inherit;
+    cursor: pointer;
+  }
+  button:focus-visible, input:focus-visible {
+    outline: 2px solid var(--plata);
+    outline-offset: 4px;
+  }
+  button:disabled { opacity: .42; cursor: default }
+  .principal { background: var(--plata); color: var(--fondo); font-weight: 750 }
+  .escena {
+    width: min(77vw, 410px);
+    margin: 26px auto 15px;
+    perspective: 850px;
+    touch-action: none;
+    user-select: none;
+    cursor: grab;
+  }
+  .escena:active { cursor: grabbing }
+  #tiara {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid #c5d6eb66;
+    border-radius: 12px;
+    box-shadow: 0 16px 42px #0008;
+    pointer-events: none;
+    transform: rotateX(var(--x, 0deg)) rotateY(var(--y, 0deg));
+    transition: transform .18s ease-out;
+  }
+  .escena.arrastrando #tiara { transition: none }
+  .giro {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 9px 12px;
+    margin-bottom: 22px;
+  }
+  .giro label { color: var(--suave); font-size: .85rem }
+  .giro input { width: min(36vw, 170px); accent-color: var(--plata) }
+  .giro button { font-size: .82rem }
+  .tarjeta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+    background: var(--panel);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+  }
+  .foto {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: clamp(310px, 67svh, 580px);
+    border: 0;
+    border-radius: 0;
+    background: #080f19;
+    padding: 0;
+    touch-action: pan-y;
+  }
+  .foto img { display: block; width: 100%; height: 100%; object-fit: contain }
+  .foto span {
+    position: absolute;
+    bottom: 9px;
+    right: 9px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: #0b1320ee;
+    font-size: .75rem;
+  }
+  .nota { align-self: center; padding: clamp(18px, 4vw, 50px) }
+  .nota h2 { font-size: clamp(1.9rem, 4vw, 3.6rem) }
+  .controles { display: flex; align-items: center; justify-content: space-between; gap: 8px }
+  #numero { color: var(--suave); font-size: .85rem }
+  .cierre { padding-top: 20vh }
+  dialog {
+    max-width: 94vw;
+    max-height: 94svh;
+    padding: 8px;
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+    background: var(--fondo);
+  }
+  dialog::backdrop { background: #03070ce8 }
+  dialog form { text-align: right; margin-bottom: 6px }
+  dialog img { display: block; max-width: 100%; max-height: 78svh; margin: auto }
+  @media (max-width: 650px) {
+    .tarjeta { grid-template-columns: 1fr }
+    .foto { height: clamp(235px, 45svh, 430px) }
+  }
+  @media (prefers-reduced-motion: reduce) { #tiara { transition: none } }
+</style>
+</head>
+<body>
+<main>
+  <section id="portada" class="portada">
+    <p class="ceja">Un recordatorio</p>
+    <h1>Eres fuerte, princesa.</h1>
+    <p>Y lo serás mucho más.</p>
 
+    <div id="escena" class="escena">
+      <img id="tiara" src="./img/corona.jpg"
+           alt="La corona plateada de la foto, con filigrana y un cristal central">
+    </div>
+    <p id="faltaCorona" hidden>No se encontró la foto en img/corona.jpg.</p>
+
+    <div class="giro" id="controlesGiro">
+      <label for="angulo">Arrastra o desliza para girar</label>
+      <input id="angulo" type="range" min="-28" max="28" value="0">
+      <button id="centrar" type="button">Centrar</button>
+    </div>
+    <button id="empezar" class="principal" type="button">Ver las fotos →</button>
+  </section>
+
+  <section id="galeria" aria-label="Galería de fotos" hidden>
+    <article class="tarjeta">
+      <button id="abrirFoto" class="foto" type="button" aria-label="Ver foto completa">
+        <img id="foto" alt="">
+        <span id="estadoFoto">Ver foto completa</span>
+      </button>
+      <div class="nota">
+        <div aria-live="polite" aria-atomic="true">
+          <p id="tema" class="ceja"></p>
+          <h2 id="frase" tabindex="-1"></h2>
+          <p id="detalle"></p>
+        </div>
+        <div class="controles">
+          <button id="anterior" type="button" aria-label="Foto anterior">←</button>
+          <span id="numero"></span>
+          <button id="siguiente" class="principal" type="button">Siguiente →</button>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section id="cierre" class="cierre" hidden>
+    <h2 id="final" tabindex="-1">Y esto recién empieza.</h2>
+    <p>Admiro a la persona que eres. Y confío en la que estás llegando a ser.</p>
+    <button id="volver" type="button">Volver a la corona</button>
+  </section>
+</main>
+
+<dialog id="visor" aria-label="Foto completa">
+  <form method="dialog"><button aria-label="Cerrar foto" autofocus>×</button></form>
+  <img id="fotoGrande" alt="">
+</dialog>
+
+<script>
+  const $ = id => document.getElementById(id);
+  const entre = (valor, min, max) => Math.min(max, Math.max(min, valor));
+  const escena = $("escena");
+  const tiara = $("tiara");
+  const angulo = $("angulo");
+  let x = 0, y = 0, arrastre = null;
+
+  function girar(nuevoX, nuevoY) {
+    x = entre(nuevoX, -14, 14);
+    y = entre(nuevoY, -28, 28);
+    tiara.style.setProperty("--x", x + "deg");
+    tiara.style.setProperty("--y", y + "deg");
+    angulo.value = Math.round(y);
+  }
+
+  escena.addEventListener("pointerdown", e => {
+    if (arrastre || e.button !== 0) return;
+    arrastre = { id: e.pointerId, px: e.clientX, py: e.clientY, x, y };
+    escena.setPointerCapture(e.pointerId);
+    escena.classList.add("arrastrando");
+  });
+
+  escena.addEventListener("pointermove", e => {
+    if (!arrastre || e.pointerId !== arrastre.id) return;
+    girar(
+      arrastre.x - (e.clientY - arrastre.py) * .17,
+      arrastre.y + (e.clientX - arrastre.px) * .19
+    );
+  });
+
+  for (const evento of ["pointerup", "pointercancel", "lostpointercapture"]) {
+    escena.addEventListener(evento, e => {
+      if (!arrastre || e.pointerId !== arrastre.id) return;
+      arrastre = null;
+      escena.classList.remove("arrastrando");
+    });
+  }
+
+  angulo.addEventListener("input", () => girar(0, Number(angulo.value)));
+  $("centrar").addEventListener("click", () => girar(0, 0));
+
+  function coronaNoEncontrada() {
+    escena.hidden = true;
+    $("controlesGiro").hidden = true;
+    $("faltaCorona").hidden = false;
+  }
+  tiara.addEventListener("error", coronaNoEncontrada);
+  if (tiara.complete && !tiara.naturalWidth) coronaNoEncontrada();
+
+  const momentos = [
+    {
+      foto: "file_00000000ee14820e805ad75c1e1cc244.png",
+      tema: "Fuerza",
+      frase: "Eres fuerte, princesa.",
+      detalle: "Y lo serás mucho más. Ya has demostrado que sabes seguir incluso cuando cuesta.",
+      alt: "De pie en la cancha con la corona plateada"
+    },
+    {
+      foto: "file_0000000034e8820e94d044cd4c314783.png",
+      tema: "Cabeza en alto",
+      frase: "Que un mal día no te haga olvidar quién eres.",
+      detalle: "Si hoy tienes que bajar la cabeza para descansar, hazlo. La corona sigue ahí.",
+      alt: "Retrato con corona y maquillaje de estrellas"
+    },
+    {
+      foto: "file_000000004750820e93d5376edefb118a.png",
+      tema: "Inspiración",
+      frase: "Eres una inspiración para los que te conocen.",
+      detalle: "Tal vez tú no siempre lo ves. Desde fuera se nota.",
+      alt: "Selfie en la tienda con corona, chompa y bolsa"
+    },
+    {
+      foto: "file_0000000085a8820ebefc9788720b5c88.png",
+      tema: "Admiración",
+      frase: "Eres alguien de admirar.",
+      detalle: "No por lo que tienes que llegar a ser, sino por quien ya eres.",
+      alt: "Selfie con corona, lentes y una lata de Fanta"
+    }
+  ];
+
+  let actual = 0, toque = null, ultimoDeslizamiento = 0;
+
+  function seccion(id, foco) {
+    for (const nombre of ["portada", "galeria", "cierre"]) {
+      $(nombre).hidden = nombre !== id;
+    }
+    window.scrollTo(0, 0);
+    $(foco).focus({ preventScroll: true });
+  }
+
+  function mostrar(i) {
+    if (i < 0 || i >= momentos.length) return;
+    actual = i;
+    const m = momentos[i];
+    $("foto").alt = m.alt;
+    $("estadoFoto").textContent = "Ver foto completa";
+    $("foto").src = "./img/" + m.foto;
+    $("tema").textContent = m.tema;
+    $("frase").textContent = m.frase;
+    $("detalle").textContent = m.detalle;
+    $("numero").textContent = (i + 1) + " / " + momentos.length;
+    $("anterior").disabled = i === 0;
+    $("siguiente").textContent = i === momentos.length - 1
+      ? "Ver cierre →" : "Siguiente →";
+  }
+
+  $("empezar").addEventListener("click", () => {
+    mostrar(0);
+    seccion("galeria", "frase");
+  });
+  $("volver").addEventListener("click", () => seccion("portada", "empezar"));
+  $("anterior").addEventListener("click", () => mostrar(actual - 1));
+  $("siguiente").addEventListener("click", () => {
+    if (actual < momentos
